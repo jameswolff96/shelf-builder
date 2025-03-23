@@ -5,6 +5,28 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.3] - 2025-03-23
+### Changed
+- Hide Spot Width Selector when printing
+- Update title in head section
+- Make editability of Spot Item more obvious in edit mode
+
+### Fixed
+- Update state when Aisle, Bin, and Shelf identifiers are changed
+- Update state when spot item is changed
+
+---
+
+## [1.0.2] - 2025-03-23
+### Fixed
+- Issues with state persistence between reloads and app runs
+
+---
+
+## [1.0.1] - 2025-03-23
+### Fixed
+- Shelf width not resetting when the reset button in the settings modal is pressed
+
 ---
 
 ## [1.0.0] - 2025-03-23
