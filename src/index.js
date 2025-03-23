@@ -195,7 +195,6 @@ function updateSpotNumbers() {
             if (numberSpan) numberSpan.textContent = `${String(index).padStart(2, '0')}:`;
         });
     });
-    autoSaveState();
 }
 
 const observer = new MutationObserver(updateSpotNumbers);
@@ -397,8 +396,6 @@ function resetAppState() {
     // Save the reset state
     autoSaveState();
 }
-
-applySettings();
 document.addEventListener('DOMContentLoaded', () => {
     if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
         document.documentElement.setAttribute('data-theme', 'dark');
@@ -409,5 +406,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (saved) {
         importJSON(null, saved);
     }
+    applySettings();
 });
 
