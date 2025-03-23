@@ -382,6 +382,10 @@ function resetAppState() {
     // Clear and reset shelves
     document.getElementById('shelfContainer').innerHTML = '';
 
+    // Reset shelf width
+    document.getElementById('shelfWidthInput').value = 4;
+    updateShelfWidthDisplay();
+
     // Reset spot size config
     spotSizeConfig = [...defaultSpotSizeConfig];
     renderSpotSizeOptions();
