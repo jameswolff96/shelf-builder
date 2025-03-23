@@ -1,0 +1,287 @@
+:root {
+    --bg: #ffffff;
+    --fg: #000000;
+    --border: #444;
+    --input-bg: #f9f9f9;
+    --button-bg: #f0f0f0;
+    --button-fg: #000000;
+    --button-border: #cccccc;
+    --modal-bg: #ffffff;
+    --modal-fg: #000000;
+}
+
+html[data-theme="dark"] {
+    --bg: #121212;
+    --fg: #e0e0e0;
+    --border: #888;
+    --input-bg: #1e1e1e;
+    --button-bg: #2a2a2a;
+    --button-fg: #ffffff;
+    --button-border: #555555;
+    --modal-bg: #1f1f1f;
+    --modal-fg: #e0e0e0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    font-size: calc(16px * var(--font-scale, 1));
+    padding: 20px;
+    margin: auto;
+    background-color: var(--bg);
+    color: var(--fg);
+}
+
+.controls {
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.bin-label {
+    border: 2px solid var(--border);
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+.shelf {
+    margin-top: 10px;
+    padding: 5px;
+    /* debug border */
+    border: 1px dashed #888;
+    margin-bottom: 10px;
+}
+
+.spot {
+    display: inline-block;
+    padding: 2px 0;
+}
+
+.spot-wrapper {
+    /* Force black text */
+    color: #000000;
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    padding: 2px 0;
+    border-radius: 4px;
+    margin: 4px 0;
+    gap: 4px;
+    white-space: nowrap;
+    cursor: grab;
+    box-sizing: border-box;
+}
+
+.spot-wrapper:active {
+    cursor: grabbing;
+}
+
+.spot-number {
+    font-weight: bold;
+    user-select: none;
+}
+
+.spot-item {
+    min-width: 40px;
+}
+
+.spot-wrapper button {
+    background: none;
+    border: none;
+    color: #c00;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.bin-header input {
+    font-size: 1.2rem;
+    margin-right: 0.5rem;
+}
+
+.insert-shelf-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 0;
+}
+
+.insert-shelf-button::before,
+.insert-shelf-button::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: #ccc;
+    margin: 0 10px;
+}
+
+.insert-shelf-button button {
+    font-size: 1rem;
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 1px solid var(--button-border);
+    background-color: var(--button-bg);
+    color: var(--button-fg);
+    cursor: pointer;
+}
+
+.insert-shelf-button button:hover {
+    filter: brightness(1.1);
+}
+
+.add-shelf-button {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.add-shelf-button button {
+    font-size: 1.2rem;
+    padding: 6px 12px;
+    cursor: pointer;
+}
+
+input,
+fieldset {
+    background-color: var(--input-bg);
+    color: var(--fg);
+    border: 1px solid var(--border);
+}
+
+input[type="file"]::file-selector-button {
+    background-color: var(--button-bg);
+    color: var(--button-fg);
+    border: 1px solid var(--button-border);
+    padding: 4px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button {
+    background-color: var(--button-bg);
+    color: var(--button-fg);
+    border: 1px solid var(--button-border);
+}
+
+button:hover {
+    filter: brightness(1.1);
+}
+
+#physicalShelfWidthDisplay {
+    margin-top: 1rem;
+    font-style: italic;
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal.hidden {
+    display: none;
+}
+
+.modal-content {
+    background: var(--modal-bg);
+    color: var(--modal-fg);
+    padding: 20px;
+    border-radius: 8px;
+    min-width: 300px;
+}
+
+.modal-content label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.modal-actions {
+    text-align: right;
+    margin-top: 1rem;
+}
+
+/* Print styles */
+@media print {
+
+    /* Attempt to force color printing */
+    * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+
+    /* Force light mode for printing */
+    html {
+        color-scheme: light;
+        /* improves native control styling */
+        --bg: #ffffff;
+        --fg: #000000;
+        --border: #444;
+        --input-bg: #f9f9f9;
+        --modal-bg: #ffffff;
+        --modal-fg: #000000;
+        --button-bg: #f0f0f0;
+        --button-fg: #000000;
+        --button-border: #cccccc;
+    }
+
+    html[data-theme="dark"] {
+        /* Override dark mode values with light equivalents for printing */
+        --bg: #ffffff;
+        --fg: #000000;
+        --border: #444;
+        --input-bg: #f9f9f9;
+        --modal-bg: #ffffff;
+        --modal-fg: #000000;
+        --button-bg: #f0f0f0;
+        --button-fg: #000000;
+        --button-border: #cccccc;
+    }
+
+    /* Leave the bin label border visible */
+    .bin-label {
+        border: 2px solid black;
+        page-break-inside: avoid;
+    }
+
+    /* Inputs should look like static text */
+    input {
+        border: none !important;
+        background: transparent !important;
+        color: black !important;
+        font-weight: bold;
+        font-size: 1em;
+        pointer-events: none;
+    }
+
+    /* Hide purely interactive UI controls */
+    .controls,
+    .add-shelf-button,
+    .insert-shelf-button,
+    button:not(.spot-size),
+    #settingsModal {
+        display: none !important;
+    }
+
+    /* Clean layout spacing */
+    .shelf,
+    .spot-container {
+        margin: 0;
+        padding: 0;
+    }
+
+    .spot-wrapper {
+        box-shadow: none;
+        page-break-inside: avoid;
+    }
+}

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Warehouse Label Editor</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+
+  <h1>Warehouse Shelf Designer</h1>
+
+  <div class="controls">
+    <button onclick="exportJSON()">Export as JSON</button>
+    <input type="file" accept="application/json" onchange="importJSON(event)">
+    <button onclick="window.print()" title="Print">
+      <i class="fas fa-print"></i> Print
+    </button>
+    <button onclick="openSettings()" title="Settings"><i class="fas fa-cog"></i></button>
+    <button onclick="toggleDarkMode()" title="Toggle Dark Mode">
+      <i id="themeIcon" class="fas fa-moon"></i>
+    </button>
+  </div>
+
+  <div id="settingsModal" class="modal hidden">
+    <div class="modal-content">
+      <h2>Settings</h2>
+      <label>
+        Shelf Width:
+        <input type="number" id="shelfWidthInput" value="4" min="1" /> ft
+      </label>
+      <fieldset>
+        <legend>Spot Sizes & Colors</legend>
+        <div id="spotSizeOptions"></div>
+        <button type="button" onclick="addSpotSizeOption()">+ Add Size</button>
+        <div id="spotSizeWarning" style="color: red; margin-top: 0.5rem; display: none;">
+          Spot sizes must be unique.
+        </div>
+      </fieldset>
+
+
+      <div class="modal-actions">
+        <button onclick="applySettings()">Apply</button>
+        <button onclick="closeSettings()">Close</button>
+      </div>
+
+      <button onclick="resetAppState()" style="margin-top: 1rem; color: red;">
+        <i class="fas fa-undo-alt"></i> Reset All Settings
+      </button>
+    </div>
+  </div>
+
+  <div id="bin" class="bin-label">
+    <div class="bin-header">
+      <label>Aisle: <input id="aisleInput" type="text" value="A" size="1" maxlength="1"
+          oninput="this.value=this.value.toUpperCase().replace(/[^A-Z]/g,'')"></label>
+      <label>Bin: <input id="binInput" type="number" value="1" min="0" max="99"></label>
+    </div>
+    <div id="shelfContainer"></div>
+    <div class="add-shelf-button">
+      <button onclick="addShelfToEnd()"><i class="fas fa-plus"></i> Add Shelf</button>
+    </div>
+    <div id="physicalShelfWidthDisplay">
+      Shelf Width: 4 ft
+    </div>
+  </div>
+  <div id="spotSizeLegend" style="margin-top: 1rem;"></div>
+
+  <template id="shelfTemplate">
+    <div class="insert-shelf-button">
+      <button onclick="addShelfBefore(this)"><i class="fas fa-plus"></i></button>
+    </div>
+    <div class="shelf">
+      <label>Shelf: <input type="text" class="shelf-name" value="X" size="1" maxlength="1"
+          oninput="this.value=this.value.toUpperCase().replace(/[^A-Z]/g,'')"></label>
+      <button onclick="addSpot(this)">Add Spot</button>
+      <button onclick="removeShelf(this)">Remove Shelf</button>
+      <div class="spot-container"></div>
+    </div>
+  </template>
+
+  <template id="spotTemplate">
+    <div class="spot-wrapper" draggable="true" ondragstart="onDragStart(event)" ondragover="onDragOver(event)"
+      ondrop="onDrop(event)">
+      <span class="spot-number">00:</span>
+      <span class="spot spot-item" contenteditable="true">Item</span>
+      <select class="spot-size" onchange="updateSpotColor(this)">
+        <option value="12">12 in</option>
+        <option value="18">18 in</option>
+        <option value="24">24 in</option>
+      </select>
+      <button onclick="this.parentElement.remove()">✕</button>
+    </div>
+  </template>
+
+  <script type="text/javascript" src="index.js"> </script>
+</body>
+
+</html>
