@@ -85,6 +85,21 @@ body {
     min-width: 40px;
 }
 
+.spot-item[contenteditable="true"] {
+    border: 1px solid #000000;
+    padding: 2px 4px;
+    border-radius: 4px;
+    min-width: 40px;
+    display: inline-block;
+    background-color: #f9f9f9;
+    color: #000000;
+}
+
+.spot-item[contenteditable="true"]:focus {
+    outline: 1px solid #cccccc;
+    background-color: #f0f0f0;
+}
+
 .spot-wrapper button {
     background: none;
     border: none;
@@ -284,5 +299,10 @@ button:hover {
     .spot-wrapper {
         box-shadow: none;
         page-break-inside: avoid;
+    }
+
+    .spot-item[contenteditable="true"] {
+        border: 0 !important;
+        background-color: transparent !important;
     }
 }
