@@ -269,6 +269,7 @@ button:hover {
     .add-shelf-button,
     .insert-shelf-button,
     button:not(.spot-size),
+    select,
     #settingsModal {
         display: none !important;
     }
