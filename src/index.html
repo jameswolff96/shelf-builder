@@ -86,7 +86,7 @@
     <div class="spot-wrapper" draggable="true" ondragstart="onDragStart(event)" ondragover="onDragOver(event)"
       ondrop="onDrop(event)">
       <span class="spot-number">00:</span>
-      <span class="spot spot-item" contenteditable="true">Item</span>
+      <span class="spot spot-item" contenteditable="true" onchange="autoSaveState()">Item</span>
       <select class="spot-size" onchange="updateSpotColor(this)">
         <option value="12">12 in</option>
         <option value="18">18 in</option>
