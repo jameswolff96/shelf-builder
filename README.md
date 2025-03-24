@@ -1,6 +1,6 @@
 # Warehouse Label Editor
 
-A self-contained, interactive tool for designing, labeling, and exporting shelf layouts in a warehouse setting. Built with vanilla HTML, CSS, and JavaScript. Designed for use in-browser or packaged as a standalone Electron app.
+A self-contained, interactive tool for designing, and printing shelf layouts in a warehouse setting. Built with vanilla HTML, CSS, and JavaScript. Designed for use in-browser or packaged as a standalone Electron app.
 
 ---
 
@@ -24,8 +24,8 @@ A self-contained, interactive tool for designing, labeling, and exporting shelf 
 - 🖨 **Print-Ready Output**  
   Optimized for printing on 8.5"x11" paper. Automatically switches to light theme.
 
-- 🔄 **Drag-and-Drop Spot Reordering**  
-  Move spots between shelves; spot numbering updates automatically.
+- ~~🔄 **Drag-and-Drop Spot Reordering**~~  *Temporarily Disabled*  
+  ~~Move spots between shelves; spot numbering updates automatically.~~
 
 - 🧰 **Electron-Ready**  
   Can be built into a standalone `.exe` using Electron and Docker.
