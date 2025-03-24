@@ -91,7 +91,7 @@
   </template>
 
   <template id="spotTemplate">
-    <div class="spot-wrapper" draggable="true" ondragstart="onDragStart(event)" ondragover="onDragOver(event)"
+    <div class="spot-wrapper" draggable="false" ondragstart="onDragStart(event)" ondragover="onDragOver(event)"
       ondrop="onDrop(event)">
       <span class="spot-number">00:</span>
       <span class="spot spot-item" contenteditable="true" onchange="autoSaveState()">Item</span>
