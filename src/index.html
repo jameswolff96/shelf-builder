@@ -14,15 +14,23 @@
   <h1>Warehouse Shelf Designer</h1>
 
   <div class="controls">
-    <button onclick="exportJSON()">Export as JSON</button>
-    <input type="file" accept="application/json" onchange="importJSON(event)">
-    <button onclick="window.print()" title="Print">
-      <i class="fas fa-print"></i> Print
-    </button>
-    <button onclick="openSettings()" title="Settings"><i class="fas fa-cog"></i></button>
-    <button onclick="toggleDarkMode()" title="Toggle Dark Mode">
-      <i id="themeIcon" class="fas fa-moon"></i>
-    </button>
+    <div class="group">
+      <button onclick="exportJSON()" title="Export JSON"><i class="fas fa-file-export"></i></button>
+
+      <label for="importFile" title="Import JSON">
+        <i class="fas fa-file-import"></i>
+      </label>
+      <input id="importFile" type="file" accept="application/json" onchange="importJSON(event)"
+        style="display: none;" />
+    </div>
+
+    <div class="group">
+      <button onclick="window.print()" title="Print"><i class="fas fa-print"></i></button>
+      <button onclick="openSettings()" title="Settings"><i class="fas fa-cog"></i></button>
+      <button onclick="toggleDarkMode()" title="Toggle Dark Mode">
+        <i id="themeIcon" class="fas fa-moon"></i>
+      </button>
+    </div>
   </div>
 
   <div id="settingsModal" class="modal hidden">
