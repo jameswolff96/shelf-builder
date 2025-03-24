@@ -51,8 +51,15 @@
 
 
       <div class="modal-actions">
+        <div class="left">
+          <button onclick="resetAppState()" style="color: red;">
+            <i class="fas fa-undo-alt"></i> Reset All Settings
+          </button>
+        </div>
+        <div class="right">
         <button onclick="applySettings()">Apply</button>
         <button onclick="closeSettings()">Close</button>
+        </div>
       </div>
 
       <button onclick="resetAppState()" style="margin-top: 1rem; color: red;">
