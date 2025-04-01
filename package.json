@@ -1,6 +1,6 @@
 {
   "name": "shelf-builder",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Offline Shelf Builder",
   "author": {
     "name": "James Wolff",
@@ -17,7 +17,7 @@
     "asar": true,
     "win": {
       "target": "portable",
-      "icon": "icon.ico"
+      "icon": "./src/favicon.ico"
     }
   },
   "devDependencies": {
