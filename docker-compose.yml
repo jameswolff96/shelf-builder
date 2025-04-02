@@ -11,8 +11,8 @@ services:
       - "traefik.http.routers.shelfbuilder.rule=Host(`tools.wolffpack.works`) && PathPrefix(`/shelf-builder`)"
       - "traefik.http.routers.shelfbuilder.entrypoints=websecure"
       - "traefik.http.routers.shelfbuilder.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.shelfbuilder.middlewares=hsts@file"
       - "traefik.http.services.shelfbuilder.loadbalancer.server.port=80"
-      - "traefik.http.routers.traefik.middlewares=hsts@file"
 
 networks:
   wolffnet:
