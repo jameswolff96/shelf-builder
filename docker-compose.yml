@@ -2,10 +2,11 @@ services:
   shelfbuilder:
     build: .
     container_name: shelfbuilder
+    expose:
+      - "80"
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.shelfbuilder.rule=Host(`tools.wolffpack.works`) && PathPrefix(`/shelf-builder`)"
       - "traefik.http.routers.shelfbuilder.entrypoints=websecure"
       - "traefik.http.routers.shelfbuilder.tls.certresolver=letsencrypt"
       - "traefik.http.services.shelfbuilder.loadbalancer.server.port=80"
-
