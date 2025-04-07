@@ -249,13 +249,18 @@ function renderSpotSizeLegend() {
         swatch.style.display = 'inline-block';
         swatch.style.width = '1em';
         swatch.style.height = '1em';
-        swatch.style.marginRight = '6px';
         swatch.style.backgroundColor = opt.color;
         swatch.style.border = '1px solid #000';
         swatch.style.verticalAlign = 'middle';
 
+        const size = document.createElement('span');
+        size.style.marginLeft = '2px';
+        size.style.marginRight = '4px';
+        size.style.verticalAlign = 'middle';
+        size.innerHTML = ` ${opt.size} in `
+
         container.appendChild(swatch);
-        container.append(` ${opt.size} in `);
+        container.appendChild(size);
     });
 }
 
