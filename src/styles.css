@@ -313,13 +313,15 @@ button:hover {
     }
 
     /* Inputs should look like static text */
-    input {
+    input,
+    select {
         border: none !important;
         background: transparent !important;
         color: black !important;
-        font-weight: bold;
-        font-size: 1em;
         pointer-events: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
     }
 
     /* Hide purely interactive UI controls */
@@ -327,7 +329,6 @@ button:hover {
     .add-shelf-button,
     .insert-shelf-button,
     button:not(.spot-size),
-    select,
     #settingsModal {
         display: none !important;
     }
