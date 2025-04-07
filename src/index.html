@@ -62,15 +62,14 @@
           <button onclick="closeSettings()">Close</button>
         </div>
       </div>
-      <em style="margin-top:.75em; font-size: .75em;">Version 1.0.6</em>
+      <em style="margin-top:.75em; font-size: .75em;">Version 1.0.7</em>
     </div>
   </div>
 
   <div id="bin" class="bin-label">
     <div class="bin-header">
-      <label>Aisle: <input id="aisleInput" type="text" value="A" size="1" maxlength="1"
-          oninput="this.value=this.value.toUpperCase().replace(/[^A-Z]/g,'')" onchange="autoSaveState()"></label>
-      <label>Bin: <input id="binInput" type="number" value="1" min="0" max="99" onchange="autoSaveState()"></label>
+      <label>Aisle: <input id="aisleInput" type="text" value="A" onchange="autoSaveState()"></label>
+      <label>Bin: <input id="binInput" type="text" value="01" onchange="autoSaveState()"></label>
     </div>
     <div id="shelfContainer"></div>
     <div class="add-shelf-button">
@@ -87,8 +86,7 @@
       <button onclick="addShelfBefore(this)"><i class="fas fa-plus"></i></button>
     </div>
     <div class="shelf">
-      <label>Shelf: <input type="text" class="shelf-name" value="A" size="1" maxlength="1"
-          oninput="this.value=this.value.toUpperCase().replace(/[^A-Z]/g,'')" onchange="autoSaveState()"></label>
+      <label>Shelf: <input type="text" class="shelf-name" value="01" onchange="autoSaveState()"></label>
       <button onclick="addSpot(this)">Add Spot</button>
       <button onclick="removeShelf(this)">Remove Shelf</button>
       <div class="spot-container"></div>
