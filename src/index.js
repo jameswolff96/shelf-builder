@@ -122,6 +122,7 @@ function importJSON(event, fromString = null) {
                 spotSizeConfig.forEach(opt => {
                     const option = document.createElement('option');
                     option.value = opt.size;
+                    if (opt.size == spot.size) option.selected = true;
                     option.textContent = `${opt.size} in`;
                     sizeSelect.appendChild(option);
                 });
