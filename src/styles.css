@@ -84,6 +84,17 @@ body {
     margin-bottom: 10px;
 }
 
+.spot-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-top: 10px;
+}
+
+.spot-container>* {
+    flex-basis: calc(100% / 6.5);
+}
+
 .spot {
     display: inline-block;
     padding: 2px 0;
@@ -95,17 +106,17 @@ body {
     display: inline-flex;
     align-items: center;
     border: 1px solid #ccc;
-    padding: 2px 0;
+    padding: 2px 5px;
     border-radius: 4px;
-    margin: 4px 0;
+    margin: 4px;
     gap: 4px;
     white-space: nowrap;
     cursor: grab;
     box-sizing: border-box;
 }
 
-.spot-wrapper:active {
-    cursor: grabbing;
+.spot-wrapper button {
+    margin-left: auto;
 }
 
 .spot-number {
@@ -334,8 +345,7 @@ button:hover {
     }
 
     /* Clean layout spacing */
-    .shelf,
-    .spot-container {
+    .shelf {
         margin: 0;
         padding: 0;
     }
