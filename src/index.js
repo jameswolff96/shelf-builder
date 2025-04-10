@@ -118,6 +118,13 @@ function importJSON(event, fromString = null) {
                 const spotNode = document.getElementById('spotTemplate').content.cloneNode(true);
                 spotNode.querySelector('.spot-item').innerText = spot.item;
                 const sizeSelect = spotNode.querySelector('.spot-size');
+                sizeSelect.innerHTML = '';
+                spotSizeConfig.forEach(opt => {
+                    const option = document.createElement('option');
+                    option.value = opt.size;
+                    option.textContent = `${opt.size} in`;
+                    sizeSelect.appendChild(option);
+                });
                 sizeSelect.value = spot.size;
                 updateSpotColor(sizeSelect);
                 spotContainer.appendChild(spotNode);
