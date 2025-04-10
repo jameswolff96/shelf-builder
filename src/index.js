@@ -74,13 +74,12 @@ function exportJSON() {
 function importJSON(event, fromString = null) {
     const loadData = (json) => {
         const data = JSON.parse(json);
-        if (event) {
-            // Check version compatibility
-            if (typeof data.version !== 'number') {
-                if (!confirm("This file has no version info. Attempt to load anyway?")) return;
-            } else if (data.version > 1) {
-                if (!confirm(`This file was saved with a newer version (${data.version}). Attempt to load anyway?`)) return;
-            }
+
+        // Check version compatibility
+        if (typeof data.version !== 'number') {
+            if (!confirm("This file has no version info. Attempt to load anyway?")) return;
+        } else if (data.version > 1) {
+            if (!confirm(`This file was saved with a newer version (${data.version}). Attempt to load anyway?`)) return;
         }
 
         document.getElementById('aisleInput').value = data.aisle;
