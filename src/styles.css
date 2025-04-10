@@ -289,6 +289,11 @@ button:hover {
         print-color-adjust: exact !important;
     }
 
+    @page {
+        margin: 1mm !important;
+        size: letter landscape !important
+    }
+
     /* Force light mode for printing */
     html {
         color-scheme: light;
