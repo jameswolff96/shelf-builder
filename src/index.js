@@ -40,36 +40,56 @@ function addSpot(button) {
     autoSaveState();
 }
 
-function exportJSON() {
-    const aisle = document.getElementById('aisleInput').value;
-    const bin = document.getElementById('binInput').value;
-    const theme = document.documentElement.getAttribute('data-theme') || 'light';
-    const shelfWidthFt = parseFloat(document.getElementById('shelfWidthInput').value || 4);
+async function exportJSON() {
+  const aisle = document.getElementById('aisleInput').value;
+  const bin = document.getElementById('binInput').value;
 
-    const shelves = Array.from(document.querySelectorAll('.shelf')).map(shelf => {
-        return {
-            name: shelf.querySelector('.shelf-name')?.value || '',
-            spots: Array.from(shelf.querySelectorAll('.spot-wrapper')).map(wrapper => ({
-                item: wrapper.querySelector('.spot-item')?.innerText || '',
-                size: parseInt(wrapper.querySelector('.spot-size')?.value || 12)
-            }))
-        };
-    });
+  const data = {
+    version: 1,
+    aisle, bin,
+    theme: document.documentElement.getAttribute('data-theme') || 'light',
+    spotSizeConfig,
+    shelfWidthFt: parseFloat(document.getElementById('shelfWidthInput').value || 4),
+    shelves: Array.from(document.querySelectorAll('.shelf')).map(shelf => ({
+      name: shelf.querySelector('.shelf-name')?.value || '',
+      spots: Array.from(shelf.querySelectorAll('.spot-wrapper')).map(wrapper => ({
+        item: wrapper.querySelector('.spot-item')?.innerText || '',
+        size: parseInt(wrapper.querySelector('.spot-size')?.value || 12)
+      }))
+    }))
+  };
 
-    const data = {
-        version: 1,
-        aisle, bin, theme, spotSizeConfig,
-        shelfWidthFt,
-        shelves
-    };
-    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+  const jsonString = JSON.stringify(data, null, 2);
+
+  // Modern browser support
+  if (window.showSaveFilePicker) {
+    try {
+      const handle = await window.showSaveFilePicker({
+        suggestedName: `bin-${aisle}-${bin}.json`,
+        types: [{
+          description: 'JSON file',
+          accept: { 'application/json': ['.json'] }
+        }]
+      });
+
+      const writable = await handle.createWritable();
+      await writable.write(jsonString);
+      await writable.close();
+    } catch (err) {
+      console.error('Export canceled or failed:', err);
+    }
+  } else {
+    // Fallback for older browsers
+    const blob = new Blob([jsonString], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
     a.download = `bin-${aisle}-${bin}.json`;
     a.click();
     URL.revokeObjectURL(url);
+  }
 }
+
 
 function importJSON(event, fromString = null) {
     const loadData = (json) => {
