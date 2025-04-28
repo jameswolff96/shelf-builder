@@ -45,13 +45,14 @@ async function exportJSON() {
   const bin = document.getElementById('binInput').value;
 
   const data = {
-    version: 1,
+    version: 2,
     aisle, bin,
     theme: document.documentElement.getAttribute('data-theme') || 'light',
     spotSizeConfig,
     shelfWidthFt: parseFloat(document.getElementById('shelfWidthInput').value || 4),
     shelves: Array.from(document.querySelectorAll('.shelf')).map(shelf => ({
       name: shelf.querySelector('.shelf-name')?.value || '',
+      spotsPerRow: shelf.querySelector('.spots-per-row')?.value || 6,
       spots: Array.from(shelf.querySelectorAll('.spot-wrapper')).map(wrapper => ({
         item: wrapper.querySelector('.spot-item')?.innerText || '',
         size: parseInt(wrapper.querySelector('.spot-size')?.value || 12)
@@ -98,8 +99,8 @@ function importJSON(event, fromString = null) {
         // Check version compatibility
         if (typeof data.version !== 'number') {
             if (!confirm("This file has no version info. Attempt to load anyway?")) return;
-        } else if (data.version > 1) {
-            if (!confirm(`This file was saved with a newer version (${data.version}). Attempt to load anyway?`)) return;
+        } else if (data.version !== 2) {
+            if (!confirm(`This file was saved with a different version (${data.version}). Attempt to load anyway?`)) return;
         }
 
         document.getElementById('aisleInput').value = data.aisle;
@@ -131,6 +132,7 @@ function importJSON(event, fromString = null) {
         data.shelves.forEach(shelf => {
             const shelfNode = document.getElementById('shelfTemplate').content.cloneNode(true);
             shelfNode.querySelector('.shelf-name').value = shelf.name;
+            shelfNode.querySelector('.spots-per-row').value = shelf.spotsPerRow? || 6;
             const spotContainer = shelfNode.querySelector('.spot-container');
 
             shelf.spots.forEach(spot => {
@@ -149,8 +151,10 @@ function importJSON(event, fromString = null) {
                 updateSpotColor(sizeSelect);
                 spotContainer.appendChild(spotNode);
             });
-
+            
             container.appendChild(shelfNode);
+
+            updateSpotBasis(shelfNode.querySelector('.spots-per-row'));
         });
 
         document.querySelectorAll('.spot-container').forEach(container => {
@@ -183,6 +187,7 @@ function autoSaveState() {
         shelfWidthFt: parseFloat(document.getElementById('shelfWidthInput').value || 4),
         shelves: Array.from(document.querySelectorAll('.shelf')).map(shelf => ({
             name: shelf.querySelector('.shelf-name')?.value || '',
+            spotsPerRow: shelf.querySelector('.spots-per-shelf')?.value || 6,
             spots: Array.from(shelf.querySelectorAll('.spot-wrapper')).map(wrapper => ({
                 item: wrapper.querySelector('.spot-item')?.innerText || '',
                 size: parseInt(wrapper.querySelector('.spot-size')?.value || 12)
@@ -242,6 +247,20 @@ function updateSpotColor(select) {
     } else {
         wrapper.style.backgroundColor = '';
     }
+    autoSaveState();
+}
+
+function updateSpotBasis(input) {
+    const spotContainer = input.closest('.spot-container');
+    const spotsPerRow = input.value + .5;
+
+    if (spotsPerRow < 1) {
+        spotsPerRow = 6.5;
+    }
+    
+    document.querySelectorAll(':scope > *').forEach(child => {
+        child.style.flexBasis = `calc(100% / ${spotsPerRow})`;
+    });
     autoSaveState();
 }
 
@@ -440,4 +459,3 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     applySettings();
 });
-
