@@ -131,11 +131,13 @@ function importJSON(event, fromString = null) {
 
         data.shelves.forEach(shelf => {
             const shelfNode = document.getElementById('shelfTemplate').content.cloneNode(true);
+            
             shelfNode.querySelector('.shelf-name').value = shelf.name;
             if (shelf.spotsPerRow === undefined) {
                 shelf.spotsPerRow = 6;
             }
             shelfNode.querySelector('.spots-per-row').value = shelf.spotsPerRow;
+            
             const spotContainer = shelfNode.querySelector('.spot-container');
 
             shelf.spots.forEach(spot => {
@@ -453,6 +455,19 @@ function resetAppState() {
     // Save the reset state
     autoSaveState();
 }
+
+document.addEventListener('focusin', function (event) {
+  if (event.target.matches('.spot-item[contenteditable="true"]')) {
+    setTimeout(() => {
+      const range = document.createRange();
+      range.selectNodeContents(event.target);
+      const selection = window.getSelection();
+      selection.removeAllRanges();
+      selection.addRange(range);
+    }, 0);
+  }
+});
+
 document.addEventListener('DOMContentLoaded', () => {
     if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
         document.documentElement.setAttribute('data-theme', 'dark');
