@@ -91,10 +91,6 @@ body {
     margin-top: 10px;
 }
 
-.spot-container>* {
-    flex-basis: calc(100% / 6.5);
-}
-
 .spot {
     display: inline-block;
     padding: 2px 0;
