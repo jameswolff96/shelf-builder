@@ -183,7 +183,7 @@ function importJSON(event, fromString = null) {
 
 function autoSaveState() {
     const exportData = {
-        version: 1,
+        version: 2,
         aisle: document.getElementById('aisleInput').value,
         bin: document.getElementById('binInput').value,
         theme: document.documentElement.getAttribute('data-theme') || 'light',
@@ -191,7 +191,7 @@ function autoSaveState() {
         shelfWidthFt: parseFloat(document.getElementById('shelfWidthInput').value || 4),
         shelves: Array.from(document.querySelectorAll('.shelf')).map(shelf => ({
             name: shelf.querySelector('.shelf-name')?.value || '',
-            spotsPerRow: shelf.querySelector('.spots-per-shelf')?.value || 6,
+            spotsPerRow: shelf.querySelector('.spots-per-row')?.value || 6,
             spots: Array.from(shelf.querySelectorAll('.spot-wrapper')).map(wrapper => ({
                 item: wrapper.querySelector('.spot-item')?.innerText || '',
                 size: parseInt(wrapper.querySelector('.spot-size')?.value || 12)
