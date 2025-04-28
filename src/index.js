@@ -132,7 +132,10 @@ function importJSON(event, fromString = null) {
         data.shelves.forEach(shelf => {
             const shelfNode = document.getElementById('shelfTemplate').content.cloneNode(true);
             shelfNode.querySelector('.shelf-name').value = shelf.name;
-            shelfNode.querySelector('.spots-per-row').value = shelf.spotsPerRow? || 6;
+            if (shelf.spotsPerRow === undefined) {
+                shelf.spotsPerRow = 6;
+            }
+            shelfNode.querySelector('.spots-per-row').value = shelf.spotsPerRow;
             const spotContainer = shelfNode.querySelector('.spot-container');
 
             shelf.spots.forEach(spot => {
@@ -153,8 +156,6 @@ function importJSON(event, fromString = null) {
             });
             
             container.appendChild(shelfNode);
-
-            updateSpotBasis(shelfNode.querySelector('.spots-per-row'));
         });
 
         document.querySelectorAll('.spot-container').forEach(container => {
@@ -164,6 +165,9 @@ function importJSON(event, fromString = null) {
         updateSpotNumbers();
         updateAllSpotSizeDropdowns();
         renderSpotSizeLegend();
+        document.querySelectorAll('.spot-per-row').forEach(input => {
+            updateSpotBasis(input);
+        });
     };
 
     if (fromString) {
@@ -251,15 +255,17 @@ function updateSpotColor(select) {
 }
 
 function updateSpotBasis(input) {
-    const spotContainer = input.closest('.spot-container');
-    const spotsPerRow = input.value + .5;
+    const shelf = input.closest('.shelf');
+    const spotsPerRow = parseInt(input.value) + 0.5;
 
     if (spotsPerRow < 1) {
         spotsPerRow = 6.5;
     }
+
+    const basis = 100 / spotsPerRow;
     
-    document.querySelectorAll(':scope > *').forEach(child => {
-        child.style.flexBasis = `calc(100% / ${spotsPerRow})`;
+    shelf.querySelectorAll('.spot-container > *').forEach(child => {
+        child.style.flexBasis = `${basis}%`;
     });
     autoSaveState();
 }
