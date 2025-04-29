@@ -37,6 +37,8 @@ function addSpot(button) {
     applySettings();
     const select = container.lastElementChild.querySelector('.spot-size');
     if (select) updateSpotColor(select);
+    const spr = container.parentElement.querySelector('.spots-per-row');
+    updateSpotBasis(spr);
     autoSaveState();
 }
 
@@ -167,7 +169,7 @@ function importJSON(event, fromString = null) {
         updateSpotNumbers();
         updateAllSpotSizeDropdowns();
         renderSpotSizeLegend();
-        document.querySelectorAll('.spot-per-row').forEach(input => {
+        document.querySelectorAll('.spots-per-row').forEach(input => {
             updateSpotBasis(input);
         });
     };
