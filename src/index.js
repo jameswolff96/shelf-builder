@@ -42,7 +42,7 @@ function addSpot(button) {
     autoSaveState();
 }
 
-function removeShelf(button) {
+function removeSpot(button) {
     button.parentElement.remove();
     updateSpotNumbers();
     autoSaveState();
