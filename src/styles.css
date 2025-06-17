@@ -266,14 +266,33 @@ button:hover {
     margin-top: 1rem;
 }
 
-.modal-actions .left {
+.left {
     display: flex;
     gap: 1rem;
 }
 
-.modal-actions .right {
+.right {
     display: flex;
     gap: 1rem;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+}
+
+.btn {
+    font-size: 13.333px;
+    text-decoration: none;
+    background-color: var(--button-bg);
+    color: var(--button-fg);
+    padding: 2px 6px;
+    border: 1px solid var(--button-border);
+}
+
+.bth:hover {
+    filter: brightness(1.1);
 }
 
 /* Print styles */
