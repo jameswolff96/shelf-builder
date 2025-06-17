@@ -52,8 +52,7 @@ A self-contained, interactive tool for designing, and printing shelf layouts in 
 
 ## Credits
 - Font Awesome for icons
-- Electron for app packaging
-- Docker for cross-platform build tooling
+- Docker for deployment
 
 ---
 
